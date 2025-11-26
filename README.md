@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+
+    <style>
+        /* Background setup */
+        body {
+            background-image: url("backgroung img.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Main heading */
+        #h1 {
+            text-align: center;
+            border: 2px solid black;
+            border-bottom: none;
+            background-color: yellow;
+            padding: 10px;
+            width: 290px;
+            margin: 20px auto;
+            font-style: italic;
+            font-size: 20px;
+        }
+
+        /* Calculator box */
+        .box {
+            border: 2px solid black;
+            border-radius: 20px;
+            background-color: yellow;
+            width: 300px;
+            padding: 20px;
+            margin: 40px auto;
+        }
+
+        /* Calculator inner container */
+        .calc {
+            margin-left: 40px;
+        }
+
+        #screen {
+            height: 40px;
+            margin-bottom: 20px;
+            border: 2px solid orange;
+            font-size: 20px;
+            padding-left: 10px;
+            border-radius: 20px;
+            width: 200px;
+        }
+
+        /* Row layout */
+        .row {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        button {
+            width: 40px;
+            height: 40px;
+            margin: 5px;
+            background-color: green;
+            color: white;
+            border: black;
+            border-style: solid;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div id="h1"><h1>CALCULATOR</h1></div>
+
+<div class="box">
+    <div class="calc">  
+        <div class="output">
+            <input type="text" id="screen">
+        </div>
+
+        <button onclick="clearScreen()">C</button>
+
+        <div class="row">
+            <button onclick="press('7')">7</button>
+            <button onclick="press('8')">8</button>
+            <button onclick="press('9')">9</button>
+            <button onclick="press('+')">+</button>
+        </div>
+
+        <div class="row">
+            <button onclick="press('4')">4</button>
+            <button onclick="press('5')">5</button>
+            <button onclick="press('6')">6</button>
+            <button onclick="press('-')">-</button>
+        </div>
+
+        <div class="row">
+            <button onclick="press('1')">1</button>
+            <button onclick="press('2')">2</button>
+            <button onclick="press('3')">3</button>
+            <button onclick="press('*')">*</button>
+        </div>
+
+        <div class="row">
+            <button onclick="press('0')">0</button>
+            <button onclick="press('/')">/</button>
+            <button onclick="press('.')">.</button>
+            <button onclick="calculate()">=</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let screen = document.getElementById("screen");
+
+    function press(value) {
+        const lastChar = screen.value.slice(-1);
+        const operators = "+-*/";
+
+        // Prevent typing multiple operators in a row
+        if (operators.includes(value) && operators.includes(lastChar)) {
+            return;
+        }
+
+        screen.value += value;
+    }
+
+    function clearScreen() {
+        screen.value = "";
+    }
+
+    function calculate() {
+        try {
+            const lastChar = screen.value.slice(-1);
+            if ("+-*/".includes(lastChar)) {
+                screen.value = "Error";
+                return;
+            }
+
+            screen.value = eval(screen.value);
+        } catch {
+            screen.value = "Error";
+        }
+    }
+</script>
+
+</body>
+</html>
